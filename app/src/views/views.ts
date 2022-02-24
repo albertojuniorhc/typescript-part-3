@@ -1,3 +1,4 @@
+import { inspect } from "../decorators/inspect.js";
 import { logRunTime } from "../decorators/logRunTime.js";
 
 export abstract class View<T> {
@@ -16,7 +17,8 @@ export abstract class View<T> {
       this.scape = scape;
     }
   }
-  @logRunTime(false)
+  @logRunTime(true)
+  @inspect()
   public update(model: T): void {
     let template = this.template(model);
     if (this.scape) {
