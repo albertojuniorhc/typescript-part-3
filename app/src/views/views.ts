@@ -16,7 +16,7 @@ export abstract class View<T> {
       this.scape = scape;
     }
   }
-  @logRunTime()
+  @logRunTime(false)
   public update(model: T): void {
     let template = this.template(model);
     if (this.scape) {

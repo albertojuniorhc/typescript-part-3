@@ -46,5 +46,5 @@ export class NegotiationController {
     }
 }
 __decorate([
-    logRunTime()
+    logRunTime(true)
 ], NegotiationController.prototype, "add", null);

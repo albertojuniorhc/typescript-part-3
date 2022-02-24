@@ -20,7 +20,7 @@ export class NegotiationController {
     this.negotiationsView.update(this.negotiations);
   }
 
-  @logRunTime()
+  @logRunTime(true)
   public add(): void {
     const negotiation = Negotiation.createFrom(
       this.inputDate.value,
