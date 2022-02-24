@@ -3,7 +3,6 @@ export function escape(target, propertyKey, descriptor) {
     descriptor.value = function (...args) {
         let returnOriginalMethod = originalMethod.apply(this, args);
         if (typeof (returnOriginalMethod === "string")) {
-            console.log(`@escape running on class ${this.constructor.name} to method ${propertyKey}`);
             returnOriginalMethod = returnOriginalMethod.replace(/<script>[\s\S]*?<script>/, "");
         }
         return returnOriginalMethod;
