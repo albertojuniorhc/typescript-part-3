@@ -1,5 +1,5 @@
 # Typescript Part 3
-
+..
 Project based on "Alura's course about Typescript - module 3."
 
 The project's idea is to create a form to insert trade operations information.
