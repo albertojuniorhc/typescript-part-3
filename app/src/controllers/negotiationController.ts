@@ -2,6 +2,7 @@ import { domInjector } from '../decorators/domInjector.js'
 import { inspect } from '../decorators/inspect.js'
 import { logRunTime } from '../decorators/logRunTime.js'
 import { DaysOfWeek } from '../enums/daysOfWeek.js'
+import { TodayNegotiations } from '../interfaces/todayNegotiation.js'
 import { Negotiation } from '../models/negotiation.js'
 import { Negotiations } from '../models/negotiations.js'
 import { messageView } from '../views/messageView.js'
@@ -45,10 +46,9 @@ export class NegotiationController {
   }
 
   public importData(): void {
-    console.log('oioi')
     fetch('http://localhost:8080/dados')
       .then(res => res.json())
-      .then((data: any[]) => {
+      .then((data: TodayNegotiations[]) => {
         return data.map(dataItem => {
           return new Negotiation(
             new Date(), dataItem.vezes, dataItem.montante

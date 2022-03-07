@@ -30,7 +30,6 @@ export class NegotiationController {
         this.updateView();
     }
     importData() {
-        console.log('oioi');
         fetch('http://localhost:8080/dados')
             .then(res => res.json())
             .then((data) => {
