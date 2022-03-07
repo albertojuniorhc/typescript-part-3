@@ -10,3 +10,13 @@ if (form) {
 else {
     throw Error("Error on application");
 }
+const importButton = document.querySelector('#btn-import');
+if (importButton) {
+    importButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        controller.importData();
+    });
+}
+else {
+    throw Error("Error on application");
+}
