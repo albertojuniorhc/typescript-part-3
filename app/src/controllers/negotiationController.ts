@@ -2,11 +2,11 @@ import { domInjector } from '../decorators/domInjector.js'
 import { inspect } from '../decorators/inspect.js'
 import { logRunTime } from '../decorators/logRunTime.js'
 import { DaysOfWeek } from '../enums/daysOfWeek.js'
-import { TodayNegotiations } from '../interfaces/todayNegotiation.js'
 import { Negotiation } from '../models/negotiation.js'
 import { Negotiations } from '../models/negotiations.js'
 import { messageView } from '../views/messageView.js'
 import { NegotiationsView } from '../views/negotiationsView.js'
+import { NegotiationsService } from '../services/negotiationsService.js'
 
 export class NegotiationController {
   @domInjector('#data')
@@ -21,6 +21,7 @@ export class NegotiationController {
   private negotiations: Negotiations = new Negotiations()
   private negotiationsView = new NegotiationsView('#negotiationsView')
   private messageView = new messageView('#messageView')
+  private negotiationsService = new NegotiationsService()
 
   constructor() {
     // this.inputDate = <HTMLInputElement>document.querySelector("#data");
@@ -46,21 +47,12 @@ export class NegotiationController {
   }
 
   public importData(): void {
-    fetch('http://localhost:8080/dados')
-      .then(res => res.json())
-      .then((data: TodayNegotiations[]) => {
-        return data.map(dataItem => {
-          return new Negotiation(
-            new Date(), dataItem.vezes, dataItem.montante
-          )
-        })
-      })
-      .then(todayNegotiations => {
-        for(let negotiation of todayNegotiations) {
-          this.negotiations.add(negotiation)
-        }
-        this.updateView();
-      });
+    this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
+      for (let negotiation of todayNegotiations) {
+        this.negotiations.add(negotiation)
+      }
+      this.updateView()
+    })
   }
 
   private isWorkingDay(date: Date) {
