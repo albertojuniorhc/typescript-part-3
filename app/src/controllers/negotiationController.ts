@@ -7,6 +7,7 @@ import { Negotiations } from '../models/negotiations.js'
 import { messageView } from '../views/messageView.js'
 import { NegotiationsView } from '../views/negotiationsView.js'
 import { NegotiationsService } from '../services/negotiationsService.js'
+import { print } from '../utils/print.js'
 
 export class NegotiationController {
   @domInjector('#data')
@@ -42,8 +43,7 @@ export class NegotiationController {
       return
     }
     this.negotiations.add(negotiation)
-    console.log(negotiation.toText())
-    console.log(this.negotiations.toText())
+    print(negotiation, this.negotiations)
     this.cleanForm()
     this.updateView()
   }

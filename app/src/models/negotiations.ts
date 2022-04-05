@@ -1,6 +1,7 @@
+import { Printable } from "../utils/printable.js";
 import { Negotiation } from "./negotiation.js";
 
-export class Negotiations {
+export class Negotiations extends Printable {
   private negotiations: Negotiation[] = [];
 
   public add(negotiation: Negotiation) {
