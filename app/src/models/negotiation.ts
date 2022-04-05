@@ -14,6 +14,14 @@ export class Negotiation {
     return date;
   }
 
+  public toText(): string {
+    return `
+    Date: ${this.date},
+    Amount: ${this.amount},
+    Value: ${this.value}
+    `;
+  }
+
   public static createFrom(dateString: string, amountString: string, valueString: string): Negotiation{
     const regExp = /-/g;
     const date = new Date(dateString.replace(regExp, ","));
