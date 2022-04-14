@@ -25,9 +25,6 @@ export class NegotiationController {
   private negotiationsService = new NegotiationsService()
 
   constructor() {
-    // this.inputDate = <HTMLInputElement>document.querySelector("#data");
-    // this.inputAmount = document.querySelector("#amount") as HTMLInputElement;
-    // this.inputValue = document.querySelector("#valor") as HTMLInputElement;
     this.negotiationsView.update(this.negotiations)
   }
   @logRunTime()
@@ -49,7 +46,15 @@ export class NegotiationController {
   }
 
   public importData(): void {
-    this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
+    this.negotiationsService.getTodayNegotiations()
+    .then(todayNegotiations => {
+      return todayNegotiations.filter(todayNegotiations => {
+        return !this.negotiations
+          .list()
+          .some(negotiation => negotiation.isEqual(todayNegotiations))
+      });
+    })
+    .then((todayNegotiations) => {
       for (let negotiation of todayNegotiations) {
         this.negotiations.add(negotiation)
       }

@@ -31,4 +31,10 @@ export class Negotiation implements Printable {
     const value = parseFloat(valueString);
     return new Negotiation(date, amount, value);
   }
+
+  public isEqual(negotiation: Negotiation): boolean{
+    return this.date.getDate() === negotiation.date.getDate()
+      && this.date.getMonth() === negotiation.date.getMonth()
+      && this.date.getFullYear() === negotiation.date.getFullYear();
+  }
 }
